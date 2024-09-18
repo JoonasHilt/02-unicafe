@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 
 const App = () => {
-  const [left, setLeft] = useState(0);
+  const [left, sefLeft] = useState(0);
   const [right, setRight] = useState(0);
-
   const [allClicks, setAll] = useState([]);
 
   const handleLeftClick = () => {
@@ -23,8 +22,7 @@ const App = () => {
         <button onClick={handleLeftClick}>left</button>
         <button onClick={handleRightClick}>right</button>
         {right}
-
-        <p>{allClicks.join(" ")}</p>
+        <p>{allClicks.join("")}</p>
       </div>
     </div>
   );
