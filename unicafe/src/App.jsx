@@ -9,6 +9,7 @@ const App = () => {
   const [good, setGood] = useState(0);
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
+  const [vote, setAll] = useState(0);
 
   const setGoodVote = (goodVote) => {
     console.log("good value is now", goodVote);
@@ -25,6 +26,10 @@ const App = () => {
     setBad(badVote);
   };
 
+  const total = good + neutral + bad;
+  const average = total > 0 ? (good - bad) / total : 0;
+  const positive = total > 0 ? (good / total) * 100 : 0;
+
   return (
     <div>
       <h1>Give Feedback!</h1>
@@ -35,6 +40,9 @@ const App = () => {
       <p>Good: {good}</p>
       <p>Neutral: {neutral}</p>
       <p>Bad: {bad}</p>
+      <p>All votes: {total}</p>
+      <p>Average score is: {average}</p>
+      <p>Positive score is: {positive} %</p>
     </div>
   );
 };
