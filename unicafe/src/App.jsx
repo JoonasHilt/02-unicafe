@@ -37,12 +37,18 @@ const App = () => {
       <Button handleClick={() => setBadVote(bad + 1)} text="Bad" />
 
       <h1>Statistics!</h1>
-      <p>Good: {good}</p>
-      <p>Neutral: {neutral}</p>
-      <p>Bad: {bad}</p>
-      <p>All votes: {total}</p>
-      <p>Average score is: {average}</p>
-      <p>Positive score is: {positive} %</p>
+      {total === 0 ? (
+        <div>no feedback given yet</div>
+      ) : (
+        <div>
+          <p>Good: {good}</p>
+          <p>Neutral: {neutral}</p>
+          <p>Bad: {bad}</p>
+          <p>All votes: {total}</p>
+          <p>Average score is: {average}</p>
+          <p>Positive score is: {positive} %</p>
+        </div>
+      )}
     </div>
   );
 };
