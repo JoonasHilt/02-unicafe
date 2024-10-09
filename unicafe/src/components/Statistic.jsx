@@ -17,7 +17,7 @@ function Statistic({ good, neutral, bad }) {
       <p>Bad: {bad}</p>
       <p>Total: {total}</p>
       <p>Average: {average}</p>
-      <p>Positive: {positivePrecentage}</p>
+      <p>Positive: {positivePrecentage} %</p>
     </div>
   );
 }
