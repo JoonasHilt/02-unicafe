@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 const Anecdote = () => {
-  // Anekdoottien taulukko
+  // Anekdootit komponentin sisällä
   const anecdotes = [
     "If it hurts, do it more often.",
     "Adding manpower to a late software project makes it later!",
@@ -9,24 +9,35 @@ const Anecdote = () => {
     "Any fool can write code that a computer can understand. Good programmers write code that humans can understand.",
     "Premature optimization is the root of all evil.",
     "Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.",
-    "Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when dianosing patients.",
+    "Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients.",
     "The only way to go fast, is to go well.",
   ];
 
+  // Tilat: valittu anekdootti ja anekdoottien äänet
   const [selected, setSelected] = useState(0);
+  const [points, setPoints] = useState(new Array(anecdotes.length).fill(0)); // Taulukko nollilla
 
-  // Satunnaisen anekdootin valinta
-  const handleClick = () => {
+  // Satunnainen anekdootti
+  const handleNextAnecdote = () => {
     const randomIndex = Math.floor(Math.random() * anecdotes.length);
     setSelected(randomIndex);
+  };
+
+  // Äänestäminen
+  const handleVote = () => {
+    const copy = [...points]; // Kopioidaan taulukko
+    copy[selected] += 1; // Lisätään ääni valitulle anekdootille
+    setPoints(copy); // Päivitetään tila
   };
 
   return (
     <div>
       <h1>Anecdote of the day</h1>
       <p>{anecdotes[selected]}</p> {/* Näyttää valitun anekdootin */}
-      <button onClick={handleClick}>next anecdote</button>{" "}
-      {/* Napin painalluksella valitaan uusi anekdootti */}
+      <p>has {points[selected]} votes</p> {/* Näyttää äänimäärän */}
+      <button onClick={handleVote}>vote</button> {/* Vote-nappi */}
+      <button onClick={handleNextAnecdote}>next anecdote</button>{" "}
+      {/* Seuraava anekdootti */}
     </div>
   );
 };
