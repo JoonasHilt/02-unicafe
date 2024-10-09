@@ -2,6 +2,7 @@ import { useState } from "react";
 import Header from "../src/components/Header";
 import Statistic from "../src/components/Statistic";
 import Button from "../src/components/Button";
+import Anecdote from "../src/components/Anecdote";
 
 const App = () => {
   const [good, setGood] = useState(0);
@@ -30,6 +31,7 @@ const App = () => {
       <Button handleClick={setNeutralVote} text="Neutral" />
       <Button handleClick={setBadVote} text="Bad" />
       <Statistic good={good} neutral={neutral} bad={bad} />
+      <Anecdote />
     </>
   );
 };
