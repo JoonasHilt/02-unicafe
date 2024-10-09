@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 const Anecdote = () => {
-  // Anekdootit komponentin sisällä
   const anecdotes = [
     "If it hurts, do it more often.",
     "Adding manpower to a late software project makes it later!",
@@ -15,29 +14,45 @@ const Anecdote = () => {
 
   // Tilat: valittu anekdootti ja anekdoottien äänet
   const [selected, setSelected] = useState(0);
-  const [points, setPoints] = useState(new Array(anecdotes.length).fill(0)); // Taulukko nollilla
+  const [points, setPoints] = useState(new Array(anecdotes.length).fill(0)); // Alustetaan taulukko nollilla
 
-  // Satunnainen anekdootti
+  // Funktio satunnaisen anekdootin valintaan
   const handleNextAnecdote = () => {
-    const randomIndex = Math.floor(Math.random() * anecdotes.length);
+    let randomIndex;
+    do {
+      randomIndex = Math.floor(Math.random() * anecdotes.length);
+    } while (randomIndex === selected);
     setSelected(randomIndex);
   };
 
-  // Äänestäminen
+  // Funktio äänestämiseen
   const handleVote = () => {
-    const copy = [...points]; // Kopioidaan taulukko
+    const copy = [...points]; // Kopioidaan nykyinen äänitaulukko
     copy[selected] += 1; // Lisätään ääni valitulle anekdootille
-    setPoints(copy); // Päivitetään tila
+    setPoints(copy); // Päivitetään tila uudella taulukolla
   };
+
+  // Etsi eniten ääniä saanut anekdootti
+  const mostVotesIndex = points.indexOf(Math.max(...points));
 
   return (
     <div>
       <h1>Anecdote of the day</h1>
-      <p>{anecdotes[selected]}</p> {/* Näyttää valitun anekdootin */}
-      <p>has {points[selected]} votes</p> {/* Näyttää äänimäärän */}
-      <button onClick={handleVote}>vote</button> {/* Vote-nappi */}
-      <button onClick={handleNextAnecdote}>next anecdote</button>{" "}
-      {/* Seuraava anekdootti */}
+      <p>{anecdotes[selected]}</p>
+      <p>has {points[selected]} votes</p>
+      <button onClick={handleVote}>vote</button>
+      <button onClick={handleNextAnecdote}>next anecdote</button>
+
+      {/* Näytetään anekdootti, jolla on eniten ääniä */}
+      <h1>Anecdote with most votes</h1>
+      {points[mostVotesIndex] === 0 ? (
+        <p>No votes yet</p>
+      ) : (
+        <div>
+          <p>{anecdotes[mostVotesIndex]}</p>
+          <p>has {points[mostVotesIndex]} votes</p>
+        </div>
+      )}
     </div>
   );
 };
