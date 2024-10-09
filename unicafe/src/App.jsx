@@ -1,10 +1,7 @@
 import { useState } from "react";
 import Header from "../src/components/Header";
 import Statistic from "../src/components/Statistic";
-
-const Button = (props) => (
-  <button onClick={props.handleClick}>{props.text}</button>
-);
+import Button from "../src/components/Button";
 
 const App = () => {
   const [good, setGood] = useState(0);
